@@ -1,4 +1,7 @@
 import { Center, Heading, Image, ScrollView, Text, VStack } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
+
+import { AuthNavigatorRoutesProps } from '@routes/auth.routes'
 
 import { Input } from '@components/Input'
 import { Button } from '@components/Button'
@@ -7,14 +10,21 @@ import LogoSvg from '@assets/logo.svg'
 import BackgroudImg from '@assets/background.png'
 
 export function SignIn() {
+  const navigation = useNavigation<AuthNavigatorRoutesProps>()
+
+  function handleGoToSignUp() {
+    navigation.navigate('SignUp')
+  }
+
   return (
     <ScrollView
       contentContainerStyle={{ flexGrow: 1 }}
       showsVerticalScrollIndicator={false}
     >
-      <VStack flex={1} bg="gray.700" px={10} pb={16}>
+      <VStack flex={1} px={10} pb={16}>
         <Image
           source={BackgroudImg}
+          defaultSource={BackgroudImg}
           alt="Pessoas praticando atividade física"
           resizeMode="contain"
           position="absolute"
@@ -27,7 +37,7 @@ export function SignIn() {
           </Text>
         </Center>
 
-        <Center>
+        <Center flex={1}>
           <Heading color="gray.100" fontSize="xl" mb={6} fontFamily="heading">
             Acesse sua conta
           </Heading>
@@ -42,11 +52,15 @@ export function SignIn() {
           <Button title="Acessar" />
         </Center>
 
-        <Center mt={24}>
+        <Center flex={1} justifyContent="flex-end">
           <Text color="gray.100" fontSize="sm" mb={3} fontFamily="body">
             Ainda não tem acesso?
           </Text>
-          <Button title="Criar conta" variant="outline" />
+          <Button
+            title="Criar conta"
+            variant="outline"
+            onPress={handleGoToSignUp}
+          />
         </Center>
       </VStack>
     </ScrollView>
