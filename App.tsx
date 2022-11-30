@@ -10,7 +10,7 @@ import { NativeBaseProvider } from 'native-base'
 import { THEME } from './src/theme'
 
 import { Loading } from '@components/Loading'
-import { AppRoutes } from './src/routes'
+import { Routes } from './src/routes'
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold })
@@ -22,7 +22,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-      {fontsLoaded ? <AppRoutes /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </NativeBaseProvider>
   )
 }
