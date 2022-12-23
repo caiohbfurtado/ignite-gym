@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { FlatList, Heading, HStack, Text, VStack } from 'native-base'
+import { useNavigation } from '@react-navigation/native'
+
+import { AppNavigatorRoutesProps } from '@routes/app.routes'
 
 import { ExerciseCard } from '@components/ExerciseCard'
 import { GroupButton } from '@components/GroupButton'
@@ -25,11 +28,15 @@ const exercises = [
 
 export function Home() {
   const [filter, setFilter] = useState('costas')
+  const { navigate } = useNavigation<AppNavigatorRoutesProps>()
 
-  const handleSelectFilter = (name: string) => {
+  function handleSelectFilter(name: string) {
     setFilter(name)
   }
 
+  function handleOpenExerciseDetails() {
+    navigate('Exercise')
+  }
   return (
     <VStack flex={1}>
       <HomeHeader />
@@ -48,7 +55,8 @@ export function Home() {
         showsHorizontalScrollIndicator={false}
         _contentContainerStyle={{ px: 8 }}
         my={10}
-        maxHeight={12}
+        maxH={12}
+        minH={12}
       />
 
       <VStack mx={8} flex={1}>
@@ -70,6 +78,7 @@ export function Home() {
               series={item.series}
               repetitions={item.repetitions}
               photo={item.photo}
+              onPress={handleOpenExerciseDetails}
             />
           )}
           showsVerticalScrollIndicator={false}
